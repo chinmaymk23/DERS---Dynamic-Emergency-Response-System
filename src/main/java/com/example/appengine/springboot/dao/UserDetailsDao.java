@@ -2,6 +2,7 @@ package com.example.appengine.springboot.dao;
 
 import com.example.appengine.springboot.Algorithm;
 import com.example.appengine.springboot.ConnectionPoolContextListener;
+import com.example.appengine.springboot.dto.AlgorithmDto;
 import com.example.appengine.springboot.dto.UserDetailsDto;
 
 import javax.sql.DataSource;
@@ -30,6 +31,104 @@ public class UserDetailsDao {
             "  lat bigint NULL DEFAULT \"0\",\n" +
             "  lan bigint NULL DEFAULT \"0\"" +
             ")";
+
+    String createAlgorithmQuery = "CREATE TABLE algorithm (\n" +
+            "  maleFactor float NULL DEFAULT \"0\",\n" +
+            "  femaleFactor float NULL DEFAULT \"0\",\n" +
+            "  minIncome int NULL DEFAULT \"0\",\n" +
+            "  maxIncome int NULL DEFAULT \"0\",\n" +
+            "  minIncomeFactor float NULL DEFAULT \"0\",\n" +
+            "  maxIncomeFactor float NULL DEFAULT \"0\",\n" +
+            "  middleIncomeFactor float NULL DEFAULT \"0\",\n" +
+            "  minAge float NULL DEFAULT \"0\",\n" +
+            "  maxAge float NULL DEFAULT \"0\",\n" +
+            "  minAgeFactor float NULL DEFAULT \"0\",\n" +
+            "  maxAgeFactor float NULL DEFAULT \"0\",\n" +
+            "  middleAgeFactor float NULL DEFAULT \"0\",\n" +
+            "  terminalIllnessFactor float NULL DEFAULT \"0\",\n" +
+            "  mobilityOption1Factor float NULL DEFAULT \"0\",\n" +
+            "  mobilityOption2Factor float NULL DEFAULT \"0\",\n" +
+            "  mobilityOption3Factor float NULL DEFAULT \"0\",\n" +
+            "  breathingProblemFactor float NULL DEFAULT \"0\",\n" +
+            "  pregnancyFactor float NULL DEFAULT \"0\",\n" +
+            "  minBmi float NULL DEFAULT \"0\",\n" +
+            "  maxBmi float NULL DEFAULT \"0\",\n" +
+            "  minBmiFactor float NULL DEFAULT \"0\",\n" +
+            "  maxBmiFactor float NULL DEFAULT \"0\",\n" +
+            "  middleBmiFactor float NULL DEFAULT \"0\",\n" +
+            "  disasterLat double NULL DEFAULT \"0\",\n" +
+            "  disasterLan double NULL DEFAULT \"0\",\n" +
+            "  algoId int NULL \"1\"" +
+            ");";
+
+    String createALgoQ = "CREATE TABLE algorithm\n" +
+            "(\n" +
+            "algoId int NULL DEFAULT \"1\",\n" +
+            "maleFactor float NULL DEFAULT \"1\",\n" +
+            "femaleFactor float NULL DEFAULT \"1\",\n" +
+            "minIncomeFactor float NULL DEFAULT \"1\",\n" +
+            "maxIncomeFactor float NULL DEFAULT \"1\",\n" +
+            "middleIncomeFactor float NULL DEFAULT \"1\",\n" +
+            "minAge float NULL DEFAULT \"1\",\n" +
+            "maxAge float NULL DEFAULT \"1\",\n" +
+            "minAgeFactor float NULL DEFAULT \"1\",\n" +
+            "maxAgeFactor float NULL DEFAULT \"1\",\n" +
+            "middleAgeFactor float NULL DEFAULT \"1\",\n" +
+            "pregnancyFactor float NULL DEFAULT \"1\",\n" +
+            "terminalIllness1Factor float NULL DEFAULT \"1\",\n" +
+            "terminalIllness2Factor float NULL DEFAULT \"1\",\n" +
+            "terminalIllness3Factor float NULL DEFAULT \"1\",\n" +
+            "terminalIllness4Factor float NULL DEFAULT \"1\",\n" +
+            "mobilityOption1Factor float NULL DEFAULT \"1\",\n" +
+            "mobilityOption2Factor float NULL DEFAULT \"1\",\n" +
+            "mobilityOption3Factor float NULL DEFAULT \"1\",\n" +
+            "breathingProblem1Factor float NULL DEFAULT \"1\",\n" +
+            "breathingProblem2Factor float NULL DEFAULT \"1\",\n" +
+            "breathingProblem3Factor float NULL DEFAULT \"1\",\n" +
+            "breathingProblem4Factor float NULL DEFAULT \"1\",\n" +
+            "minBmi float NULL DEFAULT \"1\",\n" +
+            "maxBmi float NULL DEFAULT \"1\",\n" +
+            "minBmiFactor float NULL DEFAULT \"1\",\n" +
+            "maxBmiFactor float NULL DEFAULT \"1\",\n" +
+            "middleBmiFactor float NULL DEFAULT \"1\",\n" +
+            "maxIncome int NULL DEFAULT \"1\",\n" +
+            "disasterLan double NULL DEFAULT \"1\",\n" +
+            "minIncome int NULL DEFAULT \"1\",\n" +
+            "disasterLat double NULL DEFAULT \"1\");";
+
+    String insertQuery = "INSERT INTO algorithm( maleFactor,\n" +
+            "     femaleFactor,\n" +
+            "     minIncomeFactor,\n" +
+            "     maxIncomeFactor,\n" +
+            "     middleIncomeFactor,\n" +
+            "     minAge,\n" +
+            "     maxAge,\n" +
+            "     minAgeFactor,\n" +
+            "     maxAgeFactor,\n" +
+            "     middleAgeFactor,\n" +
+            "     pregnancyFactor,\n" +
+            "     terminalIllness1Factor,\n" +
+            "     terminalIllness2Factor,\n" +
+            "     terminalIllness3Factor,\n" +
+            "     terminalIllness4Factor,\n" +
+            "     mobilityOption1Factor,\n" +
+            "     mobilityOption2Factor,\n" +
+            "     mobilityOption3Factor,\n" +
+            "     breathingProblem1Factor,\n" +
+            "     breathingProblem2Factor,\n" +
+            "     breathingProblem3Factor,\n" +
+            "     breathingProblem4Factor,\n" +
+            "     minBmi,\n" +
+            "     maxBmi,\n" +
+            "     minBmiFactor,\n" +
+            "     maxBmiFactor,\n" +
+            "     middleBmiFactor,\n" +
+            "    algoId,\n" +
+            "    minIncome,\n" +
+            "    maxIncome,\n" +
+            "    disasterLat,\n" +
+            "    disasterLan) " +
+            "values (1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);";
 
 //    public void saveUserDetails(UserDetailsDto dto){
 //        System.out.println("Inside dao");
@@ -99,11 +198,9 @@ public class UserDetailsDao {
         return result;
     }
 
-    public void executeInsertQueries(String query){
-    }
-
     public void executeCreateQueries(String query){
         Connection conn = returnConnection();
+        System.out.println(query);
         try {
             PreparedStatement createTableStatement = conn.prepareStatement(query);
             createTableStatement.execute();
@@ -214,7 +311,8 @@ public class UserDetailsDao {
         Connection conn = returnConnection();
         try {
 //            String alterQuery = "ALTER TABLE userinfo MODIFY COLUMN lan DOUBLE;";
-            String query = "DELETE FROM userinfo;";
+            String query = insertQuery;//"DELETE FROM userinfo;";
+            System.out.println(insertQuery);
             System.out.println(query);
             Statement st = conn.prepareStatement(query);
             int x = st.executeUpdate(query);
@@ -223,12 +321,19 @@ public class UserDetailsDao {
             else
                 System.out.println("delete Failed");
 
-            query = "SELECT * FROM userinfo";
-            executeSelectQueries(query);
+//            query = "SELECT * FROM userinfo";
+//            executeSelectQueries(query);
             conn.close();
         } catch (SQLException ex) {
             System.out.println("Exception occured at deleteRecords "+ex);
         }
+    }
+
+    public void updateAlgo() {
+//        executeCreateQueries(createALgoQ);
+//        deleteRecords();
+//        deleteRecords();
+        executeSelectQueries("SELECT * from algorithm");
     }
 }
 

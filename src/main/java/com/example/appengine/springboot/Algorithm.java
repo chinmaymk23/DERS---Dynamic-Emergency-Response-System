@@ -4,17 +4,7 @@ import com.example.appengine.springboot.dto.UserDetailsDto;
 
 public class Algorithm {
 
-    int mode;
-    String affectedGender;
-    long minIncome;
-    long maxIncome;
-    int minAge;
-    int maxAge;
-    String isPregnancy;
-    int minBmi;
-    int maxBmi;
-    double disasterLat;     // Disaster latitude
-    double diasterLan;      // Disaster longitude
+
 
     public static int calculateUrgencyScore(UserDetailsDto dto) {
         int urgencyScore = 0;

@@ -18,6 +18,7 @@ package com.example.appengine.springboot.controller;
 
 // [START gae_java11_helloworld]
 
+import com.example.appengine.springboot.dto.AlgorithmDto;
 import com.example.appengine.springboot.dto.RescueInformationDto;
 import com.example.appengine.springboot.dto.UserDetailsDto;
 import com.example.appengine.springboot.service.RescueRequestService;
@@ -52,15 +53,29 @@ public class RescueeController {
         userDetailsService.deleteTable();
     }
 
+    @PostMapping("/updateAlgo")
+    public void updateAlgo() {
+        userDetailsService.updateAlgo();
+    }
+
+//    public void updateAlgo(AlgorithmDto dto) {
+//        userDetailsService.updateAlgo(dto);
+//    }
 
     @PostMapping("/saveUserDetails")
     public void saveUserDetails(UserDetailsDto userDetailsDto) {
         userDetailsService.saveUserDetails(userDetailsDto);
     }
 
+    @PostMapping("/mockApi")
+    public void needRescue(String uniqueId) {
+        System.out.println("Inside needRescue controller "+uniqueId);
+    }
+
     @PostMapping("/needRescue")
     public void needRescue(String uniqueId, double lat, double lan) {
         System.out.println("Inside needRescue controller");
+        System.out.println(uniqueId+" "+lat+" "+lan);
         userDetailsService.needRescue(uniqueId, lat, lan);
     }
 

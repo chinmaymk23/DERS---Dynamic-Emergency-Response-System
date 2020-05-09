@@ -1,5 +1,6 @@
 package com.example.appengine.springboot.service;
 
+import com.example.appengine.springboot.dto.AlgorithmDto;
 import com.example.appengine.springboot.dto.UserDetailsDto;
 import com.example.appengine.springboot.dao.UserDetailsDao;
 import com.example.appengine.springboot.Algorithm;
@@ -38,5 +39,12 @@ public class UserDetailsService{
 
     public void deleteTable() {
         userDetailsDao.deleteRecords();
+    }
+
+//    public void updateAlgo(AlgorithmDto dto) {
+//        userDetailsDao.updateAlgo(dto);
+//    }
+    public void updateAlgo() {
+        userDetailsDao.updateAlgo();
     }
 }

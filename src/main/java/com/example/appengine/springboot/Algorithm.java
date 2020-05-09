@@ -4,43 +4,55 @@ import com.example.appengine.springboot.dto.UserDetailsDto;
 
 public class Algorithm {
 
-    public static int calculateUrgencyScore(UserDetailsDto userDetailsDto) {
+    int mode;
+    String affectedGender;
+    long minIncome;
+    long maxIncome;
+    int minAge;
+    int maxAge;
+    String isPregnancy;
+    int minBmi;
+    int maxBmi;
+    double disasterLat;     // Disaster latitude
+    double diasterLan;      // Disaster longitude
+
+    public static int calculateUrgencyScore(UserDetailsDto dto) {
         int urgencyScore = 0;
 
 //        Age conditions
-        if (userDetailsDto.getAge() >= 60)
+        if (dto.getAge() >= 60)
             urgencyScore += 3;
-        else if (userDetailsDto.getAge() <= 15)
+        else if (dto.getAge() <= 15)
             urgencyScore += 2;
         else
             urgencyScore += 1;
 
 //        Annual income conditions
-        if (userDetailsDto.getAnnualIncome() < 25000)
+        if (dto.getAnnualIncome() < 25000)
             urgencyScore += 3;
-        else if (userDetailsDto.getAnnualIncome() >= 25000 && userDetailsDto.getAnnualIncome() < 100000)
+        else if (dto.getAnnualIncome() >= 25000 && dto.getAnnualIncome() < 100000)
             urgencyScore += 2;
         else
             urgencyScore += 1;
 
 //        Gender conditions
-//        if (userDetailsDto.getGender().equals('Female'))
+//        if (dto.getGender().equals('Female'))
 //            urgencyScore += 1;
 
 //        Medical conditions
-        if (userDetailsDto.isMobility() == 1)
-            urgencyScore += 3;
-        if (userDetailsDto.isTerminalIllness() == 1)
-            urgencyScore += 3;
-        if (userDetailsDto.isPregnancy() == 1)
-            urgencyScore += 3;
-
-
-        if (userDetailsDto.isBreathingProblem() == 1)
-            urgencyScore += 2;
+//        if (dto.isMobility() == 1)
+//            urgencyScore += 3;
+//        if (dto.isTerminalIllness() == 1)
+//            urgencyScore += 3;
+//        if (dto.isPregnancy() == 1)
+//            urgencyScore += 3;
+//
+//
+//        if (dto.isBreathingProblem() == 1)
+//            urgencyScore += 2;
 
 //        BMI score test
-        urgencyScore = checkBMI(userDetailsDto.getHeight(), userDetailsDto.getWeight(), urgencyScore);
+        urgencyScore = checkBMI(dto.getHeight(), dto.getWeight(), urgencyScore);
         System.out.println("urgencyScore - " + urgencyScore);
 
         return urgencyScore;
@@ -59,4 +71,7 @@ public class Algorithm {
         return urgencyScore;
     }
 
+    public int addLocationScore(double lat, double lan) {
+        return 1000;
+    }
 }

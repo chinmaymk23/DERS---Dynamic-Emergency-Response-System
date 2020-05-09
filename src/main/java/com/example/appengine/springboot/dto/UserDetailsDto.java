@@ -11,137 +11,37 @@ public class UserDetailsDto {
     private long annualIncome;
     private int height;
     private int weight;
-    private int mobility;
-    private int terminalIllness;
-    private int pregnancy;
-    private int breathingProblem;
-    private String others;
+    private String mobility;
+    private String terminalIllness;
+    private String pregnancy;
+    private String breathingProblem;
     private int phoneNumber;
     private int urgencyScore;
-    private int inProgress;
-    private int rescued;
-    private int needRescue;
+    private int rescueStatus;
     private double lat;
     private double lan;
 
-    public int getUrgencyScore() {
-        return urgencyScore;
-    }
-
-    public void setUrgencyScore(int urgencyScore) {
-        this.urgencyScore = urgencyScore;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public long getAnnualIncome() {
-        return annualIncome;
-    }
-
-    public void setAnnualIncome(long annualIncome) {
-        this.annualIncome = annualIncome;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public int getInProgress() {
-        return inProgress;
-    }
-
-    public void setInProgress(int inProgress) {
-        this.inProgress = inProgress;
-    }
-
-    public int getRescued() {
-        return rescued;
-    }
-
-    public void setRescued(int rescued) {
-        this.rescued = rescued;
-    }
-
-    public int getNeedRescue() {
-        return needRescue;
-    }
-
-    public void setNeedRescue(int needRescue) {
-        this.needRescue = needRescue;
-    }
-
-    public double getLat() {
-        return lat;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    public double getLan() {
-        return lan;
-    }
-
-    public void setLan(double lan) {
-        this.lan = lan;
-    }
-
-    public int isMobility() {
-        return mobility;
-    }
-
-    public void setMobility(int mobility) {
-        this.mobility = mobility;
-    }
-
-    public int isTerminalIllness() {
-        return terminalIllness;
-    }
-
-    public void setTerminalIllness(int terminalIllness) {
-        this.terminalIllness = terminalIllness;
-    }
-
-    public int isPregnancy() {
-        return pregnancy;
-    }
-
-    public void setPregnancy(int pregnancy) {
-        this.pregnancy = pregnancy;
-    }
-
-    public int isBreathingProblem() {
-        return breathingProblem;
-    }
-
-    public void setBreathingProblem(int breathingProblem) {
-        this.breathingProblem = breathingProblem;
-    }
-
-    public String isOthers() {
-        return others;
-    }
-
-    public void setOthers(String others) {
-        this.others = others;
+    @Override
+    public String toString() {
+        return "UserDetailsDto{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", uniqueId='" + uniqueId + '\'' +
+                ", address='" + address + '\'' +
+                ", gender='" + gender + '\'' +
+                ", annualIncome=" + annualIncome +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", mobility='" + mobility + '\'' +
+                ", terminalIllness='" + terminalIllness + '\'' +
+                ", pregnancy='" + pregnancy + '\'' +
+                ", breathingProblem='" + breathingProblem + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", urgencyScore=" + urgencyScore +
+                ", rescueStatus=" + rescueStatus +
+                ", lat=" + lat +
+                ", lan=" + lan +
+                '}';
     }
 
     public String getName() {
@@ -176,6 +76,70 @@ public class UserDetailsDto {
         this.address = address;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public long getAnnualIncome() {
+        return annualIncome;
+    }
+
+    public void setAnnualIncome(long annualIncome) {
+        this.annualIncome = annualIncome;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public String getMobility() {
+        return mobility;
+    }
+
+    public void setMobility(String mobility) {
+        this.mobility = mobility;
+    }
+
+    public String getTerminalIllness() {
+        return terminalIllness;
+    }
+
+    public void setTerminalIllness(String terminalIllness) {
+        this.terminalIllness = terminalIllness;
+    }
+
+    public String getPregnancy() {
+        return pregnancy;
+    }
+
+    public void setPregnancy(String pregnancy) {
+        this.pregnancy = pregnancy;
+    }
+
+    public String getBreathingProblem() {
+        return breathingProblem;
+    }
+
+    public void setBreathingProblem(String breathingProblem) {
+        this.breathingProblem = breathingProblem;
+    }
+
     public int getPhoneNumber() {
         return phoneNumber;
     }
@@ -184,29 +148,35 @@ public class UserDetailsDto {
         this.phoneNumber = phoneNumber;
     }
 
-    @Override
-    public String toString() {
-        return "UserDetailsDto{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", uniqueId='" + uniqueId + '\'' +
-                ", address='" + address + '\'' +
-                ", gender='" + gender + '\'' +
-                ", annualIncome=" + annualIncome +
-                ", height=" + height +
-                ", weight=" + weight +
-                ", mobility=" + mobility +
-                ", terminalIllness=" + terminalIllness +
-                ", pregnancy=" + pregnancy +
-                ", breathingProblem=" + breathingProblem +
-                ", others='" + others + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                ", urgencyScore=" + urgencyScore +
-                ", inProgress=" + inProgress +
-                ", rescued=" + rescued +
-                ", needRescue=" + needRescue +
-                ", lat=" + lat +
-                ", lan=" + lan +
-                '}';
+    public int getUrgencyScore() {
+        return urgencyScore;
+    }
+
+    public void setUrgencyScore(int urgencyScore) {
+        this.urgencyScore = urgencyScore;
+    }
+
+    public int getRescueStatus() {
+        return rescueStatus;
+    }
+
+    public void setRescueStatus(int rescueStatus) {
+        this.rescueStatus = rescueStatus;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLan() {
+        return lan;
+    }
+
+    public void setLan(double lan) {
+        this.lan = lan;
     }
 }

@@ -54,13 +54,9 @@ public class RescueeController {
     }
 
     @PostMapping("/updateAlgo")
-    public void updateAlgo() {
-        userDetailsService.updateAlgo();
+    public void updateAlgo(AlgorithmDto dto) {
+        userDetailsService.updateAlgo(dto);
     }
-
-//    public void updateAlgo(AlgorithmDto dto) {
-//        userDetailsService.updateAlgo(dto);
-//    }
 
     @PostMapping("/saveUserDetails")
     public void saveUserDetails(UserDetailsDto userDetailsDto) {

@@ -1,67 +1,91 @@
 package com.example.appengine.springboot;
 
+import com.example.appengine.springboot.dao.UserDetailsDao;
+import com.example.appengine.springboot.dto.AlgorithmDto;
 import com.example.appengine.springboot.dto.UserDetailsDto;
 
 public class Algorithm {
 
+    UserDetailsDao dao = new UserDetailsDao();
 
-
-    public static int calculateUrgencyScore(UserDetailsDto dto) {
+    public int calculateUrgencyScore(UserDetailsDto dto) {
+        AlgorithmDto algo = dao.getAlgo();
+        System.out.println(algo);
         int urgencyScore = 0;
 
 //        Age conditions
-        if (dto.getAge() >= 60)
-            urgencyScore += 3;
-        else if (dto.getAge() <= 15)
-            urgencyScore += 2;
+        if (dto.getAge() >= algo.getMaxAge())
+            urgencyScore += algo.getMaxAgeFactor();
+        else if (dto.getAge() <= algo.getMinAge())
+            urgencyScore += algo.getMinAgeFactor();
         else
-            urgencyScore += 1;
+            urgencyScore += algo.getMiddleAgeFactor();
 
 //        Annual income conditions
-        if (dto.getAnnualIncome() < 25000)
-            urgencyScore += 3;
-        else if (dto.getAnnualIncome() >= 25000 && dto.getAnnualIncome() < 100000)
-            urgencyScore += 2;
+        if (dto.getAnnualIncome() < algo.getMinIncome())
+            urgencyScore += algo.getMinAgeFactor();
+        else if (dto.getAnnualIncome() >= algo.getMinIncome() && dto.getAnnualIncome() < algo.getMaxIncome())
+            urgencyScore += algo.getMiddleIncomeFactor();
         else
-            urgencyScore += 1;
+            urgencyScore += algo.getMaxIncomeFactor();
 
 //        Gender conditions
-//        if (dto.getGender().equals('Female'))
-//            urgencyScore += 1;
+        if (dto.getGender().equals("Male"))
+            urgencyScore += algo.getMaleFactor();
+        else if (dto.getGender().equals("Female"))
+            urgencyScore += algo.getFemaleFactor();
 
 //        Medical conditions
-//        if (dto.isMobility() == 1)
-//            urgencyScore += 3;
-//        if (dto.isTerminalIllness() == 1)
-//            urgencyScore += 3;
-//        if (dto.isPregnancy() == 1)
-//            urgencyScore += 3;
-//
-//
-//        if (dto.isBreathingProblem() == 1)
-//            urgencyScore += 2;
+        if (dto.getTerminalIllness() == "Heart Condition")
+            urgencyScore += algo.getTerminalIllness1Factor();
+        if (dto.getTerminalIllness() == "Liver/Kindey disease")
+            urgencyScore += algo.getTerminalIllness2Factor();
+        if (dto.getTerminalIllness() == "Heart Condition")
+            urgencyScore += algo.getTerminalIllness3Factor();
+        if (dto.getTerminalIllness() == "Heart Condition")
+            urgencyScore += algo.getTerminalIllness4Factor();
+
+        if (dto.getPregnancy().equalsIgnoreCase("yes"))
+            urgencyScore += algo.getPregnancyFactor();
+
+        if (dto.getMobility() == "Heart Condition")
+            urgencyScore += algo.getMobilityOption1Factor();
+        if (dto.getMobility() == "Liver/Kindey disease")
+            urgencyScore += algo.getMobilityOption2Factor();
+        if (dto.getMobility() == "Heart Condition")
+            urgencyScore += algo.getMobilityOption3Factor();
+
+        if (dto.getBreathingProblem() == "Heart Condition")
+            urgencyScore += algo.getBreathingProblem1Factor();
+        if (dto.getBreathingProblem() == "Liver/Kindey disease")
+            urgencyScore += algo.getBreathingProblem2Factor();
+        if (dto.getBreathingProblem() == "Heart Condition")
+            urgencyScore += algo.getBreathingProblem3Factor();
+        if (dto.getBreathingProblem() == "Heart Condition")
+            urgencyScore += algo.getBreathingProblem4Factor();
 
 //        BMI score test
-        urgencyScore = checkBMI(dto.getHeight(), dto.getWeight(), urgencyScore);
+        urgencyScore = checkBMI(dto.getHeight(), dto.getWeight(), urgencyScore, algo);
         System.out.println("urgencyScore - " + urgencyScore);
 
         return urgencyScore;
     }
 
-    public static int checkBMI(int height, int weight, int urgencyScore) {
+    public static int checkBMI(int height, int weight, int urgencyScore, AlgorithmDto algo) {
         double bmi = (703 * weight / Math.pow(height, 2));
 
-        if (bmi < 18)
-            urgencyScore += 2;
-        else if (bmi > 30)
-            urgencyScore += 3;
+        if (bmi < algo.getMinBmi())
+            urgencyScore += algo.getMinBmiFactor();
+        else if (bmi > algo.getMaxBmi())
+            urgencyScore += algo.getMaxBmiFactor();
         else
-            urgencyScore += 1;
+            urgencyScore += algo.getMiddleBmiFactor();
 
         return urgencyScore;
     }
 
     public int addLocationScore(double lat, double lan) {
-        return 1000;
+        AlgorithmDto dto = dao.getAlgo();
+        return 0;
     }
 }

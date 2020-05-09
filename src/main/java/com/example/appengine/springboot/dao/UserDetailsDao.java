@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class UserDetailsDao {
 
-    Algorithm algo = new Algorithm();
+//    Algorithm algo = new Algorithm();
     String createUserDataQuery = "CREATE TABLE userinfo (\n" +
             "  name varchar(50) NOT NULL DEFAULT \"username\",\n" +
             "  age int NOT NULL DEFAULT \"70\",\n" +
@@ -235,7 +235,7 @@ public class UserDetailsDao {
                 urgencyScore = rs.getInt("urgencyScore");
             }
 
-            urgencyScore+=algo.addLocationScore(lat, lan);
+//            urgencyScore+=algo.addLocationScore(lat, lan);
 
             String query = "UPDATE userinfo u SET u.lat = "+lat+", u.lan = "+lan+", u.urgencyScore="+urgencyScore+", u.rescueStatus = 3 WHERE u.uniqueId=\""+uniqueId+"\";";
             System.out.println(query);
@@ -329,11 +329,103 @@ public class UserDetailsDao {
         }
     }
 
-    public void updateAlgo() {
+    public void updateAlgo(AlgorithmDto dto) {
 //        executeCreateQueries(createALgoQ);
 //        deleteRecords();
 //        deleteRecords();
-        executeSelectQueries("SELECT * from algorithm");
+        Connection conn = returnConnection();
+        try {
+            String query = "UPDATE algorithm a SET a.maleFactor="+dto.getMaleFactor()+",\n" +
+                    "a.femaleFactor="+dto.getFemaleFactor()+",\n" +
+                    "a.maxIncomeFactor="+dto.getMaxIncomeFactor()+",\n" +
+                    "a.middleIncomeFactor="+dto.getMiddleIncomeFactor()+",\n" +
+                    "a.minAge="+dto.getMinAge()+",\n" +
+                    "a.maxAge="+dto.getMaxAge()+",\n" +
+                    "a.minAgeFactor="+dto.getMinAgeFactor()+",\n" +
+                    "a.maxAgeFactor="+dto.getMaxAgeFactor()+",\n" +
+                    "a.middleAgeFactor="+dto.getMiddleAgeFactor()+",\n" +
+                    "a.pregnancyFactor="+dto.getPregnancyFactor()+",\n" +
+                    "a.terminalIllness1Factor="+dto.getTerminalIllness1Factor()+",\n" +
+                    "a.terminalIllness2Factor="+dto.getTerminalIllness2Factor()+",\n" +
+                    "a.terminalIllness3Factor="+dto.getTerminalIllness3Factor()+",\n" +
+                    "a.terminalIllness4Factor="+dto.getTerminalIllness4Factor()+",\n" +
+                    "a.mobilityOption1Factor="+dto.getMobilityOption1Factor()+",\n" +
+                    "a.mobilityOption2Factor="+dto.getMobilityOption2Factor()+",\n" +
+                    "a.mobilityOption3Factor="+dto.getMobilityOption3Factor()+",\n" +
+                    "a.breathingProblem1Factor="+dto.getBreathingProblem1Factor()+",\n" +
+                    "a.breathingProblem2Factor="+dto.getBreathingProblem2Factor()+",\n" +
+                    "a.breathingProblem3Factor="+dto.getBreathingProblem3Factor()+",\n" +
+                    "a.breathingProblem4Factor="+dto.getBreathingProblem4Factor()+",\n" +
+                    "a.minBmi="+dto.getMinBmi()+",\n" +
+                    "a.maxBmi="+dto.getMaxBmi()+",\n" +
+                    "a.minBmiFactor="+dto.getMinBmiFactor()+",\n" +
+                    "a.maxBmiFactor="+dto.getMaxBmiFactor()+",\n" +
+                    "a.middleBmiFactor="+dto.getMiddleBmiFactor()+",\n" +
+                    "a.minIncome="+dto.getMinIncome()+",\n" +
+                    "a.maxIncome="+dto.getMaxIncome()+",\n" +
+                    "a.disasterLat="+dto.getDisasterLat()+",\n" +
+                    "a.disasterLan="+dto.getDisasterLan()+" WHERE a.algoId=1;";
+            System.out.println(query);
+            Statement st = conn.prepareStatement(query);
+            int x = st.executeUpdate(query);
+            if (x > 0)
+                System.out.println("Successfully updated");
+            else
+                System.out.println("update Failed");
+
+            executeSelectQueries("SELECT * from algorithm");
+        }
+        catch(SQLException e){
+            System.out.println("Exception in updateAlgo "+e);
+        }
+    }
+
+    public AlgorithmDto getAlgo() {
+        Connection conn = returnConnection();
+        AlgorithmDto dto = new AlgorithmDto();
+        try {
+            String query = "SELECT * from algorithm";
+            Statement st = conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                dto.setMaleFactor(rs.getFloat("maleFactor"));
+                dto.setFemaleFactor(rs.getFloat("femaleFactor"));
+                dto.setMinIncomeFactor(rs.getFloat("minIncomeFactor"));
+                dto.setMaxIncomeFactor(rs.getFloat("maxIncomeFactor"));
+                dto.setMiddleIncomeFactor(rs.getFloat("middleIncomeFactor"));
+                dto.setMinAge(rs.getFloat("minAge"));
+                dto.setMaxAge(rs.getFloat("maxAge"));
+                dto.setMinAgeFactor(rs.getFloat("minAgeFactor"));
+                dto.setMaxAgeFactor(rs.getFloat("maxAgeFactor"));
+                dto.setMiddleAgeFactor(rs.getFloat("middleAgeFactor"));
+                dto.setPregnancyFactor(rs.getFloat("pregnancyFactor"));
+                dto.setTerminalIllness1Factor(rs.getFloat("terminalIllness1Factor"));
+                dto.setTerminalIllness2Factor(rs.getFloat("terminalIllness2Factor"));
+                dto.setTerminalIllness3Factor(rs.getFloat("terminalIllness3Factor"));
+                dto.setTerminalIllness4Factor(rs.getFloat("terminalIllness4Factor"));
+                dto.setMobilityOption1Factor(rs.getFloat("mobilityOption1Factor"));
+                dto.setMobilityOption2Factor(rs.getFloat("mobilityOption2Factor"));
+                dto.setMobilityOption3Factor(rs.getFloat("mobilityOption3Factor"));
+                dto.setBreathingProblem1Factor(rs.getFloat("breathingProblem1Factor"));
+                dto.setBreathingProblem2Factor(rs.getFloat("breathingProblem2Factor"));
+                dto.setBreathingProblem3Factor(rs.getFloat("breathingProblem3Factor"));
+                dto.setBreathingProblem4Factor(rs.getFloat("breathingProblem4Factor"));
+                dto.setMinBmi(rs.getFloat("minBmi"));
+                dto.setMaxBmi(rs.getFloat("maxBmi"));
+                dto.setMinBmiFactor(rs.getFloat("minBmiFactor"));
+                dto.setMaxBmiFactor(rs.getFloat("maxBmiFactor"));
+                dto.setMiddleBmiFactor(rs.getFloat("middleBmiFactor"));
+                dto.setMinIncome(rs.getInt("minIncome"));
+                dto.setMaxIncome(rs.getInt("maxIncome"));
+                dto.setDisasterLat(rs.getDouble("disasterLat"));
+                dto.setDisasterLan(rs.getDouble("disasterLan"));
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Exception occured inside getAlgo "+ex);
+        }
+        System.out.println(dto);
+        return dto;
     }
 }
 

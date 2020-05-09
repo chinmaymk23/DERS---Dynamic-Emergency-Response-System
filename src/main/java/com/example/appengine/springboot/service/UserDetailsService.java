@@ -41,10 +41,7 @@ public class UserDetailsService{
         userDetailsDao.deleteRecords();
     }
 
-//    public void updateAlgo(AlgorithmDto dto) {
-//        userDetailsDao.updateAlgo(dto);
-//    }
-    public void updateAlgo() {
-        userDetailsDao.updateAlgo();
+    public void updateAlgo(AlgorithmDto dto) {
+        userDetailsDao.updateAlgo(dto);
     }
 }

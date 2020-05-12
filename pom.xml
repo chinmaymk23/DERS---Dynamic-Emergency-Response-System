@@ -139,6 +139,7 @@
         <configuration>
           <projectId>GCLOUD_CONFIG</projectId>
           <version>springboot-helloworld</version>
+            <appEngineDirectory>D:/app-final.yaml</appEngineDirectory>
         </configuration>
       </plugin>
     </plugins>

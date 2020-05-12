@@ -178,7 +178,7 @@ public class UserDetailsDao {
             while (rs.next()) {
                 for(int i = 1; i <= columnsNumber; i++) {
                     System.out.print(rsmd.getColumnName(i) + ":" + rs.getString(i) + " ");
-                    result+=(rsmd.getColumnName(i)+":"+rs.getString(i)+" \n");
+                    result+=(rsmd.getColumnName(i)+":"+rs.getString(i)+"\n");
                 }
                 result+="|";
                 System.out.println("-----------------------------------------------");
@@ -221,6 +221,23 @@ public class UserDetailsDao {
             System.out.println("Exception caught at returnConnection "+e);
         }
         return null;
+    }
+
+    public int getUrgencyScore(String uniqueId) {
+        System.out.println("Inside needRescue dao");
+        int urgencyScore = 0;
+        Connection conn = returnConnection();
+        try {
+            String getIdQuery = "SELECT urgencyScore from userinfo WHERE uniqueId =\"" + uniqueId + "\";";
+            Statement sst = conn.prepareStatement(getIdQuery);
+            ResultSet rs = sst.executeQuery(getIdQuery);
+            while (rs.next()) {
+                urgencyScore = rs.getInt("urgencyScore");
+            }
+        } catch (Exception e) {
+            System.out.println("Exception at getUrgencyScore " + e);
+        }
+        return urgencyScore;
     }
 
     public void needRescue(String uniqueId, double lat, double lan) {
@@ -275,6 +292,7 @@ public class UserDetailsDao {
                 dto.setPregnancy(rs.getString("pregnancy"));
                 dto.setTerminalIllness(rs.getString("terminalIllness"));
                 dto.setPhoneNumber(rs.getInt("phoneNumber"));
+                dto.setRescueStatus(rs.getInt("rescueStatus"));
                 list.add(dto);
             }
             conn.close();
@@ -311,7 +329,7 @@ public class UserDetailsDao {
         Connection conn = returnConnection();
         try {
 //            String alterQuery = "ALTER TABLE userinfo MODIFY COLUMN lan DOUBLE;";
-            String query = insertQuery;//"DELETE FROM userinfo;";
+            String query = "DELETE FROM userinfo;";
             System.out.println(insertQuery);
             System.out.println(query);
             Statement st = conn.prepareStatement(query);
@@ -334,6 +352,8 @@ public class UserDetailsDao {
 //        deleteRecords();
 //        deleteRecords();
         Connection conn = returnConnection();
+        System.out.println("updateAlgo dao");
+        System.out.println(dto);
         try {
             String query = "UPDATE algorithm a SET a.maleFactor="+dto.getMaleFactor()+",\n" +
                     "a.femaleFactor="+dto.getFemaleFactor()+",\n" +

@@ -19,9 +19,7 @@ package com.example.appengine.springboot.controller;
 // [START gae_java11_helloworld]
 
 import com.example.appengine.springboot.dto.AlgorithmDto;
-import com.example.appengine.springboot.dto.RescueInformationDto;
 import com.example.appengine.springboot.dto.UserDetailsDto;
-import com.example.appengine.springboot.service.RescueRequestService;
 import com.example.appengine.springboot.service.UserDetailsService;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,16 +34,20 @@ import java.util.ArrayList;
 public class RescueeController {
 
     UserDetailsService userDetailsService = new UserDetailsService();
-    RescueRequestService rescueRequestService;
 
     @GetMapping("/")
     public String hello() {
-        return "Welcome to RescueMe";
+        return "Welcome to RescueMe 2";
     }
 
     @GetMapping("/seeTable")
     public String seeTable() {
         return userDetailsService.seeTable();
+    }
+
+    @GetMapping("/seeAlgo")
+    public String seeAlgo() {
+        return userDetailsService.seeAlgo();
     }
 
     @GetMapping("/deleteTable")
@@ -55,17 +57,22 @@ public class RescueeController {
 
     @PostMapping("/updateAlgo")
     public void updateAlgo(AlgorithmDto dto) {
+        System.out.println("algo controller");
+        System.out.println(dto);
         userDetailsService.updateAlgo(dto);
     }
 
     @PostMapping("/saveUserDetails")
     public void saveUserDetails(UserDetailsDto userDetailsDto) {
+        System.out.println("Inside controller");
+        System.out.println((userDetailsDto));
         userDetailsService.saveUserDetails(userDetailsDto);
     }
 
     @PostMapping("/mockApi")
-    public void needRescue(String uniqueId) {
+    public String needRescue(String uniqueId) {
         System.out.println("Inside needRescue controller "+uniqueId);
+        return uniqueId;
     }
 
     @PostMapping("/needRescue")

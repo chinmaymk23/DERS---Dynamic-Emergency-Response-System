@@ -20,6 +20,7 @@ public class UserDetailsService{
 
     public void needRescue(String uniqueId, double lat, double lan) {
         System.out.println("Inside needRescue service");
+//        int urgencyScore = userDetailsDao.getUrgencyScore(uniqueId);
         userDetailsDao.needRescue(uniqueId, lat, lan);
     }
 
@@ -33,7 +34,7 @@ public class UserDetailsService{
     }
 
     public ArrayList<UserDetailsDto> getRescueesInformation() {
-        String selectQuery = "SELECT * FROM userinfo WHERE rescueStatus = 3 ORDER BY urgencyScore;";
+        String selectQuery = "SELECT * FROM userinfo WHERE rescueStatus = 3 ORDER BY urgencyScore DESC;";
         return userDetailsDao.getRescueesInformation(selectQuery);
     }
 
@@ -42,6 +43,13 @@ public class UserDetailsService{
     }
 
     public void updateAlgo(AlgorithmDto dto) {
+        System.out.println("algo service");
+        System.out.println(dto);
         userDetailsDao.updateAlgo(dto);
+    }
+
+    public String seeAlgo() {
+        String selectQuery = "SELECT * FROM algorithm;";
+        return userDetailsDao.executeSelectQueries(selectQuery);
     }
 }

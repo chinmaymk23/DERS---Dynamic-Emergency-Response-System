@@ -38,30 +38,30 @@ public class Algorithm {
 //        Medical conditions
         if (dto.getTerminalIllness() == "Heart Condition")
             urgencyScore += algo.getTerminalIllness1Factor();
-        if (dto.getTerminalIllness() == "Liver/Kindey disease")
+        if (dto.getTerminalIllness() == "Liver or Kidney Disease")
             urgencyScore += algo.getTerminalIllness2Factor();
-        if (dto.getTerminalIllness() == "Heart Condition")
+        if (dto.getTerminalIllness() == "Immunocompromised")
             urgencyScore += algo.getTerminalIllness3Factor();
-        if (dto.getTerminalIllness() == "Heart Condition")
+        if (dto.getTerminalIllness() == "Cancer")
             urgencyScore += algo.getTerminalIllness4Factor();
 
         if (dto.getPregnancy().equalsIgnoreCase("yes"))
             urgencyScore += algo.getPregnancyFactor();
 
-        if (dto.getMobility() == "Heart Condition")
+        if (dto.getMobility() == "Completely Immobile")
             urgencyScore += algo.getMobilityOption1Factor();
-        if (dto.getMobility() == "Liver/Kindey disease")
+        if (dto.getMobility() == "Partially Immobile")
             urgencyScore += algo.getMobilityOption2Factor();
-        if (dto.getMobility() == "Heart Condition")
+        if (dto.getMobility() == "Injured")
             urgencyScore += algo.getMobilityOption3Factor();
 
-        if (dto.getBreathingProblem() == "Heart Condition")
+        if (dto.getBreathingProblem() == "Asthma")
             urgencyScore += algo.getBreathingProblem1Factor();
-        if (dto.getBreathingProblem() == "Liver/Kindey disease")
+        if (dto.getBreathingProblem() == "Lung Disease")
             urgencyScore += algo.getBreathingProblem2Factor();
-        if (dto.getBreathingProblem() == "Heart Condition")
+        if (dto.getBreathingProblem() == "Lung Cancer")
             urgencyScore += algo.getBreathingProblem3Factor();
-        if (dto.getBreathingProblem() == "Heart Condition")
+        if (dto.getBreathingProblem() == "Coughing Or Cold")
             urgencyScore += algo.getBreathingProblem4Factor();
 
 //        BMI score test
